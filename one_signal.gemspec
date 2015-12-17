@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = OneSignal::VERSION
   spec.authors       = ["Pablo Vicente"]
   spec.email         = ["vicapa99@gmail.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.summary       = %q{A gem for interacting with the OneSignal API (https://onesignal.com/)}
+  spec.description   = spec.summary
   spec.homepage      = ""
   spec.license       = "MIT"
 
