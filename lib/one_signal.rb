@@ -1,4 +1,5 @@
 require 'one_signal/version'
+require 'one_signal/client'
 require 'forwardable'
 
 module OneSignal
@@ -7,6 +8,11 @@ module OneSignal
     attr_accessor :configuration
 
     def_delegators :configuration, :app_id
+    def_delegators :client, :add_device
+  end
+
+  def self.client
+    OneSignal::Client.new
   end
 
   def self.configure

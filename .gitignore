@@ -12,3 +12,5 @@
 *.o
 *.a
 mkmf.log
+.env
+spec/vcr_cassettes/
