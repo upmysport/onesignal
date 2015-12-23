@@ -6,6 +6,7 @@ require 'one_signal/version'
 Gem::Specification.new do |spec|
   spec.name          = 'one_signal'
   spec.version       = OneSignal::VERSION
+  spec.required_ruby_version = '>= 2.0'
   spec.authors       = ['Pablo Vicente']
   spec.email         = ['vicapa99@gmail.com']
   spec.summary       = 'A gem for interacting with the OneSignal API (https://onesignal.com/)'
