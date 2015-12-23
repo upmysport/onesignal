@@ -1,3 +1,4 @@
+[![Build Status](https://circleci.com/gh/upmysport/one_signal.svg?style=shield)](https://circleci.com/gh/upmysport/one_signal)
 # OneSignal
 
 TODO: Write a gem description
