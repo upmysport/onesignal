@@ -2,6 +2,7 @@ require 'faraday'
 require 'faraday_middleware'
 
 module OneSignal
+  # The Gateway class makes HTTP requests to the OneSignal REST API
   class Gateway
     URL = 'https://onesignal.com'.freeze
     DEVICES_ENDPOINT = 'api/v1/players'.freeze
@@ -11,6 +12,8 @@ module OneSignal
       @configuration = configuration
     end
 
+    # Makes a POST request to the players endpoint
+    # @return [Hash]
     def create_device(params = {})
       response = @http_client.post(DEVICES_ENDPOINT, params.merge(app_id: @configuration.app_id))
       symbolize_keys(response.body)

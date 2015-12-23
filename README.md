@@ -27,7 +27,6 @@ OneSignal.add_device(device_type: 0, identifier: 'ce777617da7f548fe7a9ab6febb56'
 
 Methods supported by this gem and their parameters can be found in the [API Reference](https://documentation.onesignal.com/docs/server-api-overview)
 
-
 ## Contributing
 
 1. Fork it ( https://github.com/[my-github-username]/one_signal/fork )
