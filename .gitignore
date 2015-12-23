@@ -14,3 +14,4 @@
 mkmf.log
 .env
 spec/vcr_cassettes/
+.ruby-version
