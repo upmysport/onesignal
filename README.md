@@ -3,7 +3,7 @@
 [![Code Climate](https://codeclimate.com/github/upmysport/one_signal/badges/gpa.svg)](https://codeclimate.com/github/upmysport/one_signal)
 # OneSignal
 
-TODO: Write a gem description
+This Gem is a Ruby wrapper for the [OneSignal API](https://documentation.onesignal.com/docs/server-api-overview) which provides Push Notification delivery and automation.
 
 ## Installation
 
