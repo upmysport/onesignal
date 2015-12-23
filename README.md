@@ -1,5 +1,6 @@
 [![Build Status](https://circleci.com/gh/upmysport/one_signal.svg?style=shield)](https://circleci.com/gh/upmysport/one_signal)
 [![Dependency Status](https://gemnasium.com/upmysport/one_signal.svg)](https://gemnasium.com/upmysport/one_signal)
+[![Code Climate](https://codeclimate.com/github/upmysport/one_signal/badges/gpa.svg)](https://codeclimate.com/github/upmysport/one_signal)
 # OneSignal
 
 TODO: Write a gem description
