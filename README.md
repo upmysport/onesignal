@@ -23,7 +23,22 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+To use the API client it is necessary to set the server APP_ID. You can find the APP_ID on the settings page of your app.
+
+```ruby
+OneSignal.configure do |config|
+  config.app_id = 'TEST_APP_ID'
+end
+```
+
+Then the client will be ready to receive method calls on the OneSignal module.
+
+```ruby
+OneSignal.add_device(device_type: 0, identifier: 'ce777617da7f548fe7a9ab6febb56')
+```
+
+Methods supported by this gem and their parameters can be found in the [API Reference](https://documentation.onesignal.com/docs/server-api-overview)
+
 
 ## Contributing
 
