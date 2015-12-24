@@ -7,19 +7,7 @@ This Gem is a Ruby wrapper for the [OneSignal API](https://documentation.onesign
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'one_signal'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install one_signal
+This project hasn't been released yet. It's under development.
 
 ## Usage
 
