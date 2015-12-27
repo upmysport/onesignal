@@ -1,5 +1,6 @@
 require 'one_signal/gateway'
 require 'one_signal/add_device_status'
+require 'one_signal/notify_status'
 
 module OneSignal
   # The Client is a class responsible of handling all the requests to OneSignal REST API
@@ -25,6 +26,12 @@ module OneSignal
     def add_device(device_type:, identifier:)
       response = gateway.create_device(device_type: device_type, identifier: identifier)
       AddDeviceStatus.new(response)
+    end
+
+    def notify(message:, devices_ids:, locale: :en)
+      contents = { locale => message }
+      response = gateway.create_notification(contents: contents, include_player_ids: Array(devices_ids))
+      NotifyStatus.new(response)
     end
   end
 end
