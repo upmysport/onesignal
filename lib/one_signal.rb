@@ -6,6 +6,7 @@ require 'forwardable'
 module OneSignal
   class << self
     extend Forwardable
+    # @return [Configuration]
     attr_accessor :configuration
 
     # @see Configuration#app_id
