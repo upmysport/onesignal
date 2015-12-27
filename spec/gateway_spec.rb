@@ -1,13 +1,10 @@
 require 'spec_helper'
 require 'one_signal/gateway'
-require 'dotenv'
 
 module OneSignal
   RSpec.describe Gateway do
     subject(:gategay) { described_class.new(configuration) }
     let(:configuration) { double(app_id: ENV['TEST_APP_ID']) }
-
-    before { Dotenv.load }
 
     describe '#create_device' do
       let(:identifier) { 'ce777617da7f548fe7a9ab6febb56cf39fba6d382000c0395666288d961ee566' }

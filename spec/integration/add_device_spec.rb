@@ -1,6 +1,5 @@
 require 'spec_helper'
 require 'one_signal'
-require 'dotenv'
 
 RSpec.describe 'Add player/device to one signal applicaion' do
   subject(:add_device_status) do
@@ -14,7 +13,6 @@ RSpec.describe 'Add player/device to one signal applicaion' do
   let(:identifier) { 'ce777617da7f548fe7a9ab6febb56cf39fba6d382000c0395666288d961ee566' }
 
   before do
-    Dotenv.load
     OneSignal.configure do |config|
       config.app_id = ENV['TEST_APP_ID']
     end
