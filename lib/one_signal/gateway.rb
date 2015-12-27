@@ -6,6 +6,7 @@ module OneSignal
   class Gateway
     URL = 'https://onesignal.com'.freeze
     DEVICES_ENDPOINT = 'api/v1/players'.freeze
+    NOTIFICATIONS_ENDPOINT = 'api/v1/notifications'.freeze
 
     def initialize(configuration = OneSignal.configuration)
       @http_client = create_http_client
@@ -16,6 +17,11 @@ module OneSignal
     # @return [Hash]
     def create_device(params = {})
       response = @http_client.post(DEVICES_ENDPOINT, params.merge(app_id: @configuration.app_id))
+      symbolize_keys(response.body)
+    end
+
+    def create_notification(params = {})
+      response = @http_client.post(NOTIFICATIONS_ENDPOINT, params.merge(app_id: @configuration.app_id))
       symbolize_keys(response.body)
     end
 
