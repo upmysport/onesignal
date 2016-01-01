@@ -8,12 +8,14 @@ module OneSignal
     attr_reader :errors
 
     def initialize(attributes = {})
-      attributes.each { |k, v| instance_variable_set("@#{k}", v) }
+      @id = attributes.fetch(:id, '')
+      @errors = attributes.fetch(:errors, [])
+      @success = attributes.fetch(:success, false)
     end
 
     # @return [Boolean]
     def success?
-      !!@success
+      @success
     end
   end
 end

@@ -38,8 +38,8 @@ module OneSignal
           expect(status).to_not be_success
         end
 
-        it 'returns a status object with no id' do
-          expect(status.id).to be_nil
+        it 'returns an empty status object' do
+          expect(status.id).to be_empty
         end
 
         it 'returns a sttus object with an array of errors' do
