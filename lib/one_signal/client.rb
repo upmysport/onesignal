@@ -28,6 +28,18 @@ module OneSignal
       AddDeviceStatus.new(response)
     end
 
+    # Sends a notification to devices
+    #
+    # @example Sends a notification to a list of registered devices
+    #   status = Clientj.notify(message: 'Test notification', devices_ids: ['1dd608f2-c6a1-11e3-851d-000c2940e62c'])
+    #   status.success? #=> true
+    #   status.recipients #=> 1
+    #   status.id #=> '458dcec4-cf53-11e3-add2-000c2940e62c'
+    #
+    # @param message [String] message to send
+    # @param devices_ids [Array<Sring>, String]
+    # @param locale [Symbol] the message locale, `:en, :es, :de`
+    # @return [NotifyStatus] The response objecte wich holds the push notification status
     def notify(message:, devices_ids:, locale: :en)
       contents = { locale => message }
       response = gateway.create_notification(contents: contents, include_player_ids: Array(devices_ids))

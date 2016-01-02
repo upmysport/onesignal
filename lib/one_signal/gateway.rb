@@ -20,6 +20,8 @@ module OneSignal
       symbolize_keys(response.body)
     end
 
+    # Makes a POST request to the notifications endpoint
+    # @return [Hash]
     def create_notification(params = {})
       response = @http_client.post(NOTIFICATIONS_ENDPOINT, params.merge(app_id: @configuration.app_id))
       symbolize_keys(response.body)
