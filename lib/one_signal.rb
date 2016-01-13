@@ -14,6 +14,8 @@ module OneSignal
 
     # @see Client#add_device
     def_delegators :client, :add_device
+    # @see Client#notify
+    def_delegators :client, :notify
   end
 
   # @return [Client] The client builder
