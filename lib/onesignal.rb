@@ -1,9 +1,9 @@
-require 'one_signal/version'
-require 'one_signal/client'
+require 'onesignal/version'
+require 'onesignal/client'
 require 'forwardable'
 
-# The OneSignal module provides access to all the main operations
-module OneSignal
+# The Onesignal module provides access to all the main operations
+module Onesignal
   class << self
     extend Forwardable
     # @return [Configuration]
@@ -20,7 +20,7 @@ module OneSignal
 
   # @return [Client] The client builder
   def self.client
-    OneSignal::Client.new
+    Onesignal::Client.new
   end
 
   # @return [Configuration] The configuration singleton
@@ -29,9 +29,9 @@ module OneSignal
     yield(configuration)
   end
 
-  # This class stores configuration data like OneSignal applicaiton id
+  # This class stores configuration data like Onesignal applicaiton id
   class Configuration
-    # @return [String] the OneSignal application id
+    # @return [String] the Onesignal application id
     attr_accessor :app_id
   end
 end

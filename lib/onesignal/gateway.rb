@@ -1,14 +1,14 @@
 require 'faraday'
 require 'faraday_middleware'
 
-module OneSignal
-  # The Gateway class makes HTTP requests to the OneSignal REST API
+module Onesignal
+  # The Gateway class makes HTTP requests to the Onesignal REST API
   class Gateway
     URL = 'https://onesignal.com'.freeze
     DEVICES_ENDPOINT = 'api/v1/players'.freeze
     NOTIFICATIONS_ENDPOINT = 'api/v1/notifications'.freeze
 
-    def initialize(configuration = OneSignal.configuration)
+    def initialize(configuration = Onesignal.configuration)
       @http_client = create_http_client
       @configuration = configuration
     end

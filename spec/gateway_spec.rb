@@ -1,7 +1,7 @@
 require 'spec_helper'
-require 'one_signal/gateway'
+require 'onesignal/gateway'
 
-module OneSignal
+module Onesignal
   RSpec.describe Gateway do
     subject(:gategay) { described_class.new(configuration) }
     let(:configuration) { double(app_id: ENV['TEST_APP_ID']) }

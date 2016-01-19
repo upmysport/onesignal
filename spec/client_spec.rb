@@ -1,17 +1,17 @@
 require 'spec_helper'
-require 'one_signal/client'
+require 'onesignal/client'
 
-module OneSignal
+module Onesignal
   RSpec.describe Client do
     subject(:client) { described_class.new(gateway) }
 
-    let(:one_signal_device_id) { 'ffffb794-ba37-11e3-8077-031d62f86ebf' }
+    let(:onesignal_device_id) { 'ffffb794-ba37-11e3-8077-031d62f86ebf' }
 
     describe '#add_device' do
       let(:identifier) { 'ce777617da7f548fe7a9ab6febb56' }
       let(:type) { 0 }
-      let(:one_signal_response) { { success: true, id: one_signal_device_id } }
-      let(:gateway) { instance_double(Gateway, create_device: one_signal_response) }
+      let(:onesignal_response) { { success: true, id: onesignal_device_id } }
+      let(:gateway) { instance_double(Gateway, create_device: onesignal_response) }
 
       it 'sends the right message to the gateway' do
         client.add_device(device_type: type, identifier: identifier)
@@ -28,11 +28,11 @@ module OneSignal
       it 'returns a status object with the one signal device id' do
         status = client.add_device(device_type: type, identifier: identifier)
 
-        expect(status.id).to eq(one_signal_device_id)
+        expect(status.id).to eq(onesignal_device_id)
       end
 
       context 'when gateway returns errors' do
-        let(:one_signal_response) { { errors: ['app_id not found'] } }
+        let(:onesignal_response) { { errors: ['app_id not found'] } }
         let(:status) { client.add_device(identifier: '', device_type: '') }
 
         it 'is not success' do
@@ -50,18 +50,18 @@ module OneSignal
     end
 
     describe '#notify' do
-      let(:gateway) { instance_double(Gateway, create_notification: one_signal_response) }
+      let(:gateway) { instance_double(Gateway, create_notification: onesignal_response) }
       let(:number_of_recipients) { 1 }
       let(:response_id) { '458dcec4-cf53-11e3-add2-000c2940e62c' }
       let(:message) { 'Test notification' }
-      let(:one_signal_response) { { id: response_id, recipients: number_of_recipients } }
-      let(:status) { client.notify(message: message, devices_ids: one_signal_device_id) }
+      let(:onesignal_response) { { id: response_id, recipients: number_of_recipients } }
+      let(:status) { client.notify(message: message, devices_ids: onesignal_device_id) }
 
       it 'sends the right message to the gateway' do
-        client.notify(message: 'Test notification', devices_ids: one_signal_device_id)
+        client.notify(message: 'Test notification', devices_ids: onesignal_device_id)
 
         expect(gateway).to have_received(:create_notification)
-          .with(contents: { en: message }, include_player_ids: [one_signal_device_id])
+          .with(contents: { en: message }, include_player_ids: [onesignal_device_id])
       end
 
       it 'is success' do
@@ -80,15 +80,15 @@ module OneSignal
         let(:locale) { :es }
 
         it 'sends the right message to the gateway' do
-          client.notify(message: message, devices_ids: one_signal_device_id, locale: :es)
+          client.notify(message: message, devices_ids: onesignal_device_id, locale: :es)
 
           expect(gateway).to have_received(:create_notification)
-            .with(contents: { es: message }, include_player_ids: [one_signal_device_id])
+            .with(contents: { es: message }, include_player_ids: [onesignal_device_id])
         end
       end
 
       context 'when gateway returns errors' do
-        let(:one_signal_response) { { errors: ['app_id not found'] } }
+        let(:onesignal_response) { { errors: ['app_id not found'] } }
 
         it 'is not success' do
           expect(status).to_not be_success

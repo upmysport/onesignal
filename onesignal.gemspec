@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'one_signal/version'
+require 'onesignal/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'one_signal'
-  spec.version       = OneSignal::VERSION
+  spec.name          = 'onesignal'
+  spec.version       = Onesignal::VERSION
   spec.required_ruby_version = '>= 2.0'
   spec.authors       = ['Pablo Vicente']
   spec.email         = ['vicapa99@gmail.com']

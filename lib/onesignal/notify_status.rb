@@ -1,4 +1,4 @@
-module OneSignal
+module Onesignal
   # The NotifyStatus class is responsible of exposing the current status of the notify request
   # @since 0.0.1
   class NotifyStatus
