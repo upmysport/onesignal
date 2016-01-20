@@ -4,6 +4,7 @@ module Onesignal
   class AddDeviceStatus
     # @return [String] Onesignal device identifier
     attr_reader :id
+    alias device_id id
     # @return [Array] List of errors
     attr_reader :errors
 
