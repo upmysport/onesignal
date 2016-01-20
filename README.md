@@ -1,5 +1,5 @@
 [![Build Status](https://circleci.com/gh/upmysport/onesignal.svg?style=shield)](https://circleci.com/gh/upmysport/onesignal)
-[![Dependency Status](https://gemnasium.com/upmysport/onesignal.svg)](https://gemnasium.com/upmysport/onesignal)
+[![Dependency Status](https://gemnasium.com/upmysport/one_signal.svg)](https://gemnasium.com/upmysport/one_signal)
 [![Code Climate](https://codeclimate.com/github/upmysport/onesignal/badges/gpa.svg)](https://codeclimate.com/github/upmysport/onesignal)
 # Onesignal
 
