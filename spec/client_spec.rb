@@ -28,7 +28,7 @@ module Onesignal
       it 'returns a status object with the one signal device id' do
         status = client.add_device(device_type: type, identifier: identifier)
 
-        expect(status.id).to eq(onesignal_device_id)
+        expect(status.device_id).to eq(onesignal_device_id)
       end
 
       context 'when gateway returns errors' do
@@ -69,7 +69,7 @@ module Onesignal
       end
 
       it 'returns a status object with the One Signal device id' do
-        expect(status.id).to eq(response_id)
+        expect(status.device_id).to eq(response_id)
       end
 
       it 'returns a status object with the number of recipients' do
