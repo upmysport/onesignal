@@ -1,18 +1,18 @@
 require 'spec_helper'
-require 'one_signal'
+require 'onesignal'
 
-RSpec.describe OneSignal do
+RSpec.describe Onesignal do
   describe '.configure' do
     let(:app_id) { 'test id' }
 
     before do
-      OneSignal.configure do |config|
+      Onesignal.configure do |config|
         config.app_id = app_id
       end
     end
 
     it 'sets the app_id value' do
-      expect(OneSignal.app_id).to eq(app_id)
+      expect(Onesignal.app_id).to eq(app_id)
     end
   end
 end
