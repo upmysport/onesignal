@@ -23,8 +23,7 @@ Then the client will be ready to receive method calls on the Onesignal module.
 
 ```ruby
 response = Onesignal.add_device(device_type: 0, identifier: 'ce777617da7f548fe7a9ab6febb56')
-one_signal_device_id = response.id
-Onesignal.notify(message: 'Test notification', devices_ids: one_signal_device_id)
+Onesignal.notify(message: 'Test notification', devices_ids: response.id)
 ```
 
 Methods supported by this gem and their parameters can be found in the [API Reference](https://documentation.onesignal.com/docs/server-api-overview)
