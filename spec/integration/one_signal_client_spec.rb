@@ -29,7 +29,7 @@ RSpec.describe 'One Signal API client' do
     notification_status = Onesignal.notify(message: 'Test notification', devices_ids: device_id)
 
     expect(notification_status).to be_success
-    expect(notification_status.device_id).to_not be_nil
+    expect(notification_status.id).to_not be_nil
     expect(notification_status.recipients).to eq(1)
   end
 end

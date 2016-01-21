@@ -4,7 +4,7 @@ module Onesignal
   class NotifyStatus
     # @return [String] Notification identifier
     attr_reader :id
-    alias device_id id
+    alias notification_id id
     # @return [Integer] Number of devices to which the notification has been sent
     attr_reader :recipients
     # @return [Array, Hash] List of errors
