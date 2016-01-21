@@ -69,7 +69,7 @@ module Onesignal
       end
 
       it 'returns a status object with the One Signal device id' do
-        expect(status.device_id).to eq(response_id)
+        expect(status.notification_id).to eq(response_id)
       end
 
       it 'returns a status object with the number of recipients' do
