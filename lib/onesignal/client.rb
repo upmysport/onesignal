@@ -1,6 +1,6 @@
 require 'onesignal/gateway'
-require 'onesignal/result'
-require 'onesignal/notify_status'
+require 'onesignal/notification_creation_result'
+require 'onesignal/device_creation_result'
 
 module Onesignal
   # The Client is a class responsible of handling all the requests to Onesignal REST API
@@ -24,7 +24,7 @@ module Onesignal
     # @param identifier [String] Push notification identifier from Google or Apple
     # @return [AddDeviceStatus] The response object which holds the add device status
     def add_device(device_type:, identifier:)
-      Result.from_device_creation(
+      DeviceCreationResult.from_device_creation(
         gateway.create_device(device_type: device_type, identifier: identifier)
       )
     end
@@ -43,7 +43,7 @@ module Onesignal
     # @return [NotifyStatus] The response objecte wich holds the push notification status
     def notify(message:, devices_ids:, locale: :en)
       contents = { locale => message }
-      Result.from_notification_creation(
+      NotificationCreationResult.from_notification_creation(
         gateway.create_notification(contents: contents, include_player_ids: Array(devices_ids))
       )
     end

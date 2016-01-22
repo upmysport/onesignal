@@ -1,3 +1,5 @@
+require 'onesignal/result'
+
 module Onesignal
   class DeviceCreationResult
     extend Forwardable
@@ -8,6 +10,10 @@ module Onesignal
     def initialize(result, gateway_response)
       @result = result
       @device_id = gateway_response.fetch(:id, '')
+    end
+
+    def self.from_device_creation(gateway_response)
+      DeviceCreationResult.new(Result.new(gateway_response), gateway_response)
     end
   end
 end
