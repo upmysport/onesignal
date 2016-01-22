@@ -43,8 +43,9 @@ module Onesignal
     # @return [NotifyStatus] The response objecte wich holds the push notification status
     def notify(message:, devices_ids:, locale: :en)
       contents = { locale => message }
-      response = gateway.create_notification(contents: contents, include_player_ids: Array(devices_ids))
-      NotifyStatus.new(response)
+      Result.from_notification_creation(
+        gateway.create_notification(contents: contents, include_player_ids: Array(devices_ids))
+      )
     end
   end
 end

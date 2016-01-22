@@ -55,7 +55,7 @@ module Onesignal
       let(:response_id) { '458dcec4-cf53-11e3-add2-000c2940e62c' }
       let(:message) { 'Test notification' }
       let(:onesignal_response) { { id: response_id, recipients: number_of_recipients } }
-      let(:status) { client.notify(message: message, devices_ids: onesignal_device_id) }
+      let(:result) { client.notify(message: message, devices_ids: onesignal_device_id) }
 
       it 'sends the right message to the gateway' do
         client.notify(message: 'Test notification', devices_ids: onesignal_device_id)
@@ -65,15 +65,15 @@ module Onesignal
       end
 
       it 'is success' do
-        expect(status).to be_success
+        expect(result).to be_success
       end
 
-      it 'returns a status object with the One Signal device id' do
-        expect(status.notification_id).to eq(response_id)
+      it 'returns a result object with the One Signal notification id' do
+        expect(result.notification_id).to eq(response_id)
       end
 
-      it 'returns a status object with the number of recipients' do
-        expect(status.recipients).to eq(number_of_recipients)
+      it 'returns a result object with the number of recipients' do
+        expect(result.recipients).to eq(number_of_recipients)
       end
 
       context 'when the selected locale is :es' do
@@ -91,13 +91,13 @@ module Onesignal
         let(:onesignal_response) { { errors: ['app_id not found'] } }
 
         it 'is not success' do
-          expect(status).to_not be_success
+          expect(result).to_not be_success
         end
-        it 'returns an status object with an empty id' do
-          expect(status.id).to be_empty
+        it 'returns an result object with an empty notification id' do
+          expect(result.notification_id).to be_empty
         end
         it 'returns a status objects with 0 recipients' do
-          expect(status.recipients).to eq(0)
+          expect(result.recipients).to eq(0)
         end
       end
     end
