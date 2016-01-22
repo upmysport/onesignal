@@ -1,5 +1,5 @@
 require 'onesignal/gateway'
-require 'onesignal/add_device_status'
+require 'onesignal/result'
 require 'onesignal/notify_status'
 
 module Onesignal
@@ -24,8 +24,9 @@ module Onesignal
     # @param identifier [String] Push notification identifier from Google or Apple
     # @return [AddDeviceStatus] The response object which holds the add device status
     def add_device(device_type:, identifier:)
-      response = gateway.create_device(device_type: device_type, identifier: identifier)
-      AddDeviceStatus.new(response)
+      Result.from_device_creation(
+        gateway.create_device(device_type: device_type, identifier: identifier)
+      )
     end
 
     # Sends a notification to devices

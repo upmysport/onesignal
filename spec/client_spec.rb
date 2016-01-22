@@ -20,31 +20,31 @@ module Onesignal
       end
 
       it 'is success' do
-        status = client.add_device(device_type: type, identifier: identifier)
+        result = client.add_device(device_type: type, identifier: identifier)
 
-        expect(status).to be_success
+        expect(result).to be_success
       end
 
-      it 'returns a status object with the one signal device id' do
-        status = client.add_device(device_type: type, identifier: identifier)
+      it 'returns a result object with the one signal device id' do
+        result = client.add_device(device_type: type, identifier: identifier)
 
-        expect(status.device_id).to eq(onesignal_device_id)
+        expect(result.device_id).to eq(onesignal_device_id)
       end
 
       context 'when gateway returns errors' do
         let(:onesignal_response) { { errors: ['app_id not found'] } }
-        let(:status) { client.add_device(identifier: '', device_type: '') }
+        let(:result) { client.add_device(identifier: '', device_type: '') }
 
         it 'is not success' do
-          expect(status).to_not be_success
+          expect(result).to_not be_success
         end
 
-        it 'returns an empty status object' do
-          expect(status.id).to be_empty
+        it 'returns a result object with an empty device_id' do
+          expect(result.device_id).to be_empty
         end
 
-        it 'returns a sttus object with an array of errors' do
-          expect(status.errors).to eq(['app_id not found'])
+        it 'returns a ressult object with an array of errors' do
+          expect(result.errors).to eq(['app_id not found'])
         end
       end
     end
