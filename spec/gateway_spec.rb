@@ -26,6 +26,7 @@ module Onesignal
 
     describe '#create_notification' do
       let(:contents) { { en: 'Test message' } }
+      let(:data) { { foo: 'bar' } }
       let(:device_id) do
         VCR.use_cassette('create_device') do
           response = gategay.create_device(identifier: identifier, device_type: device_type)
@@ -34,7 +35,7 @@ module Onesignal
       end
       let(:response) do
         VCR.use_cassette('create_notification') do
-          gategay.create_notification(contents: contents, include_player_ids: [device_id])
+          gategay.create_notification(contents: contents, include_player_ids: [device_id], data: data)
         end
       end
 

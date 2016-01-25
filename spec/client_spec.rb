@@ -55,13 +55,14 @@ module Onesignal
       let(:response_id) { '458dcec4-cf53-11e3-add2-000c2940e62c' }
       let(:message) { 'Test notification' }
       let(:onesignal_response) { { id: response_id, recipients: number_of_recipients } }
+      let(:data) { { foo: 'bar' } }
       let(:result) { client.notify(message: message, devices_ids: onesignal_device_id) }
 
       it 'sends the right message to the gateway' do
-        client.notify(message: 'Test notification', devices_ids: onesignal_device_id)
+        client.notify(message: 'Test notification', devices_ids: onesignal_device_id, extra_data: data)
 
         expect(gateway).to have_received(:create_notification)
-          .with(contents: { en: message }, include_player_ids: [onesignal_device_id])
+          .with(contents: { en: message }, include_player_ids: [onesignal_device_id], data: data)
       end
 
       it 'is success' do
@@ -83,7 +84,7 @@ module Onesignal
           client.notify(message: message, devices_ids: onesignal_device_id, locale: :es)
 
           expect(gateway).to have_received(:create_notification)
-            .with(contents: { es: message }, include_player_ids: [onesignal_device_id])
+            .with(contents: { es: message }, include_player_ids: [onesignal_device_id], data: {})
         end
       end
 
