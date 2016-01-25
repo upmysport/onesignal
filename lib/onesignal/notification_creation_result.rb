@@ -1,10 +1,15 @@
 require 'onesignal/result'
 
 module Onesignal
+  # The NotificationCreationResult class is responsible of exposing the results of a notification creatino operation
+  # @since 0.0.1
   class NotificationCreationResult
     extend Forwardable
 
-    attr_reader :notification_id, :recipients
+    # @return [String] Onesignal notification identifier
+    attr_reader :notification_id
+    # @return [Integer] Number of deviceces that have received the notification
+    attr_reader :recipients
     def_delegators :@result, :success?, :errors
 
     def initialize(result, gateway_response)
@@ -13,6 +18,8 @@ module Onesignal
       @recipients = gateway_response.fetch(:recipients, 0)
     end
 
+    # Builds a NotificationCreationResult from a gateway response
+    # @return [NotificationCreationResult]
     def self.from_notification_creation(gateway_response)
       NotificationCreationResult.new(Result.new(gateway_response), gateway_response)
     end

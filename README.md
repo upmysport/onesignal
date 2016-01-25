@@ -15,15 +15,15 @@ To use the API client it is necessary to set the server APP_ID. You can find the
 
 ```ruby
 Onesignal.configure do |config|
-  config.app_id = 'TEST_APP_ID'
+  config.app_id = 'APP_ID'
 end
 ```
 
 Then the client will be ready to receive method calls on the Onesignal module.
 
 ```ruby
-status = Onesignal.add_device(device_type: 0, identifier: 'ce777617da7f548fe7a9ab6febb56')
-Onesignal.notify(message: 'Test notification', devices_ids: status.device_id)
+result = Onesignal.add_device(device_type: 0, identifier: 'ce777617da7f548fe7a9ab6febb56')
+Onesignal.notify(message: 'Test notification', devices_ids: result.device_id)
 ```
 
 Methods supported by this gem and their parameters can be found in the [API Reference](https://documentation.onesignal.com/docs/server-api-overview)
