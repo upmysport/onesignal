@@ -40,6 +40,7 @@ module Onesignal
     # @param message [String] message to send
     # @param devices_ids [Array<Sring>, String]
     # @param locale [Symbol] the message locale, `:en, :es, :de`
+    # @param extra_data[Hash] Custom key value pair hash that you can programmaticallyin your app
     # @return [NotificationCreationResult] The response objecte wich holds the push notification status
     def notify(message:, devices_ids:, locale: :en, extra_data: {})
       contents = { locale => message }
