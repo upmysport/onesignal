@@ -13,5 +13,11 @@ module Onesignal
     def success?
       errors.empty?
     end
+
+    def to_s
+      return 'Success' if success?
+
+      "Errors: #{@errors.join(', ')}"
+    end
   end
 end

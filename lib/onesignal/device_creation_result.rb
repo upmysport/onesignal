@@ -1,4 +1,5 @@
 require 'onesignal/result'
+require 'forwardable'
 
 module Onesignal
   # The DeviceCreationResult class is responsible of exposing the results of a device creatino operation
@@ -19,6 +20,12 @@ module Onesignal
     # @return [DeviceCreationResult]
     def self.from_device_creation(gateway_response)
       DeviceCreationResult.new(Result.new(gateway_response), gateway_response)
+    end
+
+    def to_s
+      return @result.to_s unless success?
+
+      "#{@result}, device_id: #{device_id}"
     end
   end
 end

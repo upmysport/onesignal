@@ -1,4 +1,5 @@
 require 'onesignal/result'
+require 'forwardable'
 
 module Onesignal
   # The NotificationCreationResult class is responsible of exposing the results of a notification creatino operation
@@ -22,6 +23,12 @@ module Onesignal
     # @return [NotificationCreationResult]
     def self.from_notification_creation(gateway_response)
       NotificationCreationResult.new(Result.new(gateway_response), gateway_response)
+    end
+
+    def to_s
+      return @result.to_s unless success?
+
+      "#{@result}, notification_id: #{notification_id}, recipients: #{recipients}"
     end
   end
 end
