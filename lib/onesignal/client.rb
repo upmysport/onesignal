@@ -8,8 +8,9 @@ module Onesignal
   class Client
     attr_reader :gateway
 
-    def initialize(gateway = Gateway.new)
+    def initialize(gateway = Gateway.new, configuration = Onesignal.configuration)
       @gateway = gateway
+      @configuration = configuration
     end
 
     # Registers a new device with Onesignal. If the device is already registered,
@@ -43,10 +44,19 @@ module Onesignal
     # @param extra_data[Hash] Custom key value pair hash that you can programmaticallyin your app
     # @return [NotificationCreationResult] The response objecte wich holds the push notification status
     def notify(message:, devices_ids:, locale: :en, extra_data: {})
-      contents = { locale => message }
-      NotificationCreationResult.from_notification_creation(
-        gateway.create_notification(contents: contents, include_player_ids: Array(devices_ids), data: extra_data)
-      )
+      params = {
+        contents: { locale => message },
+        include_player_ids: Array(devices_ids),
+        data: extra_data
+      }.merge(ios_params)
+
+      NotificationCreationResult.from_notification_creation(gateway.create_notification(params))
+    end
+
+    private
+
+    def ios_params
+      { ios_badgeType: @configuration.ios_badge_type, ios_badgeCount: @configuration.ios_badge_count }
     end
   end
 end
