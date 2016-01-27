@@ -3,9 +3,13 @@ require 'onesignal/client'
 
 module Onesignal
   RSpec.describe Client do
-    subject(:client) { described_class.new(gateway) }
+    subject(:client) { described_class.new(gateway, configuration) }
 
     let(:onesignal_device_id) { 'ffffb794-ba37-11e3-8077-031d62f86ebf' }
+    let(:data) { { foo: 'bar' } }
+    let(:ios_badge_type) { 'Increase' }
+    let(:ios_badge_count) { 1 }
+    let(:configuration) { double(ios_badge_type: ios_badge_type, ios_badge_count: ios_badge_count) }
 
     describe '#add_device' do
       let(:identifier) { 'ce777617da7f548fe7a9ab6febb56' }
@@ -55,14 +59,16 @@ module Onesignal
       let(:response_id) { '458dcec4-cf53-11e3-add2-000c2940e62c' }
       let(:message) { 'Test notification' }
       let(:onesignal_response) { { id: response_id, recipients: number_of_recipients } }
-      let(:data) { { foo: 'bar' } }
+      let(:expected_params) do
+        { contents: { en: message }, include_player_ids: [onesignal_device_id], data: data,
+          ios_badgeType: ios_badge_type, ios_badgeCount: ios_badge_count }
+      end
       let(:result) { client.notify(message: message, devices_ids: onesignal_device_id) }
 
       it 'sends the right message to the gateway' do
         client.notify(message: 'Test notification', devices_ids: onesignal_device_id, extra_data: data)
 
-        expect(gateway).to have_received(:create_notification)
-          .with(contents: { en: message }, include_player_ids: [onesignal_device_id], data: data)
+        expect(gateway).to have_received(:create_notification).with(expected_params)
       end
 
       it 'is success' do
@@ -79,12 +85,15 @@ module Onesignal
 
       context 'when the selected locale is :es' do
         let(:locale) { :es }
+        let(:expected_params) do
+          { contents: { es: message }, include_player_ids: [onesignal_device_id], data: {},
+            ios_badgeType: ios_badge_type, ios_badgeCount: ios_badge_count }
+        end
 
         it 'sends the right message to the gateway' do
           client.notify(message: message, devices_ids: onesignal_device_id, locale: :es)
 
-          expect(gateway).to have_received(:create_notification)
-            .with(contents: { es: message }, include_player_ids: [onesignal_device_id], data: {})
+          expect(gateway).to have_received(:create_notification).with(expected_params)
         end
       end
 
