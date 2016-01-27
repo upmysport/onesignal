@@ -10,7 +10,7 @@ module Onesignal
     attr_accessor :configuration
 
     # @see Configuration#app_id
-    def_delegators :configuration, :app_id
+    def_delegators :configuration, :app_id, :ios_badge_type, :ios_badge_count
 
     # @see Client#add_device
     def_delegators :client, :add_device
@@ -33,5 +33,14 @@ module Onesignal
   class Configuration
     # @return [String] the Onesignal application id
     attr_accessor :app_id
+    # @return [String] the badge type, `None, SetTo, Increase`
+    attr_accessor :ios_badge_type
+    # @return [Integer] the amount to increase the badge
+    attr_accessor :ios_badge_count
+
+    def initialize
+      @ios_badge_type = 'Increase'
+      @ios_badge_count = 1
+    end
   end
 end
