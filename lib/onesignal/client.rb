@@ -33,7 +33,7 @@ module Onesignal
     # Sends a notification to devices
     #
     # @example Sends a notification to a list of registered devices
-    #   result = Clientj.notify(message: 'Test notification', devices_ids: ['1dd608f2-c6a1-11e3-851d-000c2940e62c'])
+    #   result = Client.notify(message: 'Test notification', devices_ids: ['1dd608f2-c6a1-11e3-851d-000c2940e62c'])
     #   result.success? #=> true
     #   result.recipients #=> 1
     #   result.notification_id #=> '458dcec4-cf53-11e3-add2-000c2940e62c'
