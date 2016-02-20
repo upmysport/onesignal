@@ -38,7 +38,7 @@ module Onesignal
     end
 
     def symbolize_keys(hash)
-      hash.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
+      hash.each_with_object({}) { |(key, value), hash| hash[key.to_sym] = value }
     end
   end
 end
