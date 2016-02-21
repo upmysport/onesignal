@@ -5,30 +5,35 @@ module Onesignal
   # The NotificationCreationResult class is responsible of exposing the results of a notification creatino operation
   # @since 0.0.1
   class NotificationCreationResult
-    extend Forwardable
-
     # @return [String] Onesignal notification identifier
     attr_reader :notification_id
     # @return [Integer] Number of deviceces that have received the notification
     attr_reader :recipients
-    def_delegators :@result, :success?, :errors
+    # @return [Array] Array of error messages strings
+    attr_reader :errors
 
-    def initialize(result, gateway_response)
-      @result = result
-      @notification_id = gateway_response.fetch(:id, '')
-      @recipients = gateway_response.fetch(:recipients, 0)
+    def initialize(status, response_body)
+      @success = (status == 200)
+      @notification_id = response_body.fetch('id', '')
+      @recipients = response_body.fetch('recipients', 0)
+      @errors = response_body.fetch('errors', [])
     end
 
     # Builds a NotificationCreationResult from a gateway response
     # @return [NotificationCreationResult]
     def self.from_notification_creation(gateway_response)
-      NotificationCreationResult.new(Result.new(gateway_response), gateway_response)
+      NotificationCreationResult.new(gateway_response.status, gateway_response.body)
+    end
+
+    # @return [Boolean] Returns true when the operation was success
+    def success?
+      @success
     end
 
     def to_s
-      return @result.to_s unless success?
+      return "Errors: #{@errors.join(', ')}" unless success?
 
-      "#{@result}, notification_id: #{notification_id}, recipients: #{recipients}"
+      "Success, notification_id: #{notification_id}, recipients: #{recipients}"
     end
   end
 end
