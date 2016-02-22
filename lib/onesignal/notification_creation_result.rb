@@ -9,8 +9,9 @@ module Onesignal
     # @return [Array] Array of error messages strings
     attr_reader :errors
 
-    def initialize(status, response_body)
-      @success = (status == 200)
+    def initialize(response)
+      @success = (response.status == 200)
+      response_body = response.body || {}
       @notification_id = response_body.fetch('id', '')
       @recipients = response_body.fetch('recipients', 0)
       @errors = response_body.fetch('errors', [])
@@ -19,7 +20,7 @@ module Onesignal
     # Builds a NotificationCreationResult from a gateway response
     # @return [NotificationCreationResult]
     def self.from_notification_creation(gateway_response)
-      NotificationCreationResult.new(gateway_response.status, gateway_response.body)
+      NotificationCreationResult.new(gateway_response)
     end
 
     # @return [Boolean] Returns true when the operation was success

@@ -40,6 +40,18 @@ module Onesignal
           expect(result).to_not be_success
         end
       end
+
+      context 'when response has no content' do
+        let(:response) { double(status: 204, body: nil) }
+
+        it 'maps the status to not success' do
+          expect(result).to_not be_success
+        end
+
+        it 'maps the errors to an empty array' do
+          expect(result.errors).to be_empty
+        end
+      end
     end
 
     describe 'to_s' do
@@ -54,6 +66,14 @@ module Onesignal
 
         it 'returns a string with the erros' do
           expect(result.to_s).to eq('Errors: one error')
+        end
+      end
+
+      context 'when response has no content' do
+        let(:response) { double(status: 204, body: nil) }
+
+        it 'returns an empty string' do
+          expect(result.to_s).to eq('Errors: ')
         end
       end
     end
