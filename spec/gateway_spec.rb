@@ -16,11 +16,11 @@ module Onesignal
       end
 
       it 'returns a successfull response' do
-        expect(response).to include(success: true)
+        expect(response.status).to eq(200)
       end
 
-      it 'returns the device id' do
-        expect(response).to include(:id)
+      specify 'response body contains the device id' do
+        expect(response.body).to include('id')
       end
     end
 
@@ -30,7 +30,7 @@ module Onesignal
       let(:device_id) do
         VCR.use_cassette('create_device') do
           response = gategay.create_device(identifier: identifier, device_type: device_type)
-          response[:id]
+          response.body['id']
         end
       end
       let(:response) do
@@ -39,12 +39,16 @@ module Onesignal
         end
       end
 
-      it 'returns a hash with an id' do
-        expect(response).to include(:id)
+      it 'returns a successfull response' do
+        expect(response.status).to eq(200)
       end
 
-      it 'returns a hash with the number of recipients' do
-        expect(response).to include(recipients: 1)
+      specify 'response body contains the notification id' do
+        expect(response.body).to include('id')
+      end
+
+      specify 'response body contains the number of recipients' do
+        expect(response.body).to include('recipients' => 1)
       end
 
       context 'when request is invalid' do
@@ -54,9 +58,12 @@ module Onesignal
           end
         end
 
-        it 'returns a hash with an errors array' do
-          expect(response[:errors]).to be_an(Array)
-          expect(response).to include(:errors)
+        it 'returns a bad request response' do
+          expect(response.status).to eq(400)
+        end
+
+        specify 'response body contains errors' do
+          expect(response.body).to include('errors')
         end
       end
     end

@@ -16,15 +16,13 @@ module Onesignal
     # Makes a POST request to the players endpoint
     # @return [Hash]
     def create_device(params = {})
-      response = @http_client.post(DEVICES_ENDPOINT, params.merge(app_id: @configuration.app_id))
-      symbolize_keys(response.body)
+      @http_client.post(DEVICES_ENDPOINT, params.merge(app_id: @configuration.app_id))
     end
 
     # Makes a POST request to the notifications endpoint
     # @return [Hash]
     def create_notification(params = {})
-      response = @http_client.post(NOTIFICATIONS_ENDPOINT, params.merge(app_id: @configuration.app_id))
-      symbolize_keys(response.body)
+      @http_client.post(NOTIFICATIONS_ENDPOINT, params.merge(app_id: @configuration.app_id))
     end
 
     private
@@ -35,10 +33,6 @@ module Onesignal
         faraday.response :json, content_type: /\bjson$/
         faraday.adapter Faraday.default_adapter
       end
-    end
-
-    def symbolize_keys(hash)
-      hash.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
     end
   end
 end
