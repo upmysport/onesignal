@@ -1,6 +1,3 @@
-require 'onesignal/result'
-require 'forwardable'
-
 module Onesignal
   # The DeviceCreationResult class is responsible of exposing the results of a device creatino operation
   # @since 0.0.1

@@ -1,6 +1,3 @@
-require 'onesignal/result'
-require 'forwardable'
-
 module Onesignal
   # The NotificationCreationResult class is responsible of exposing the results of a notification creatino operation
   # @since 0.0.1
