@@ -36,4 +36,14 @@ RSpec.describe 'One Signal API client' do
     expect(result.notification_id).to_not be_nil
     expect(result.recipients).to eq(1)
   end
+
+  context 'when device identifier is an empty string' do
+    it "doesn't send a notification to an anonymous device" do
+      device_id = Onesignal.add_device(device_type: device_type, identifier: '').device_id
+      result = Onesignal.notify(message: message, devices_ids: device_id, extra_data: extra_data)
+      expect(result).to_not be_success
+      expect(result.notification_id).to be_empty
+      expect(result.recipients).to eq(0)
+    end
+  end
 end

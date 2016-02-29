@@ -43,8 +43,8 @@ module Onesignal
           expect(result).to_not be_success
         end
 
-        it 'maps the errors to an empty array' do
-          expect(result.errors).to be_empty
+        it 'maps the errors to an array with an empty string' do
+          expect(result.errors).to eq([''])
         end
       end
     end

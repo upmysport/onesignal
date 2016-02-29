@@ -7,22 +7,25 @@ module Onesignal
     # @return [Array] Array of error messages
     attr_reader :errors
 
-    def initialize(response)
-      @success = (response.status == 200)
-      response_body = response.body || {}
-      @device_id = response_body.fetch('id', '')
-      @errors = response_body.fetch('errors', [])
+    def initialize(attributes)
+      @device_id = attributes.fetch('id', '')
+      @errors = attributes.fetch('errors', [])
     end
 
     # Builds a DeviceCreationResult from a gateway response
     # @return [DeviceCreationResult]
     def self.from_device_creation(gateway_response)
-      DeviceCreationResult.new(gateway_response)
+      body = gateway_response.body
+      if body.nil?
+        DeviceCreationResult.new('errors' => [''])
+      else
+        DeviceCreationResult.new(gateway_response.body)
+      end
     end
 
     # @return [Boolean] Returns true when the operation was success
     def success?
-      @success
+      @errors.empty?
     end
 
     def to_s
