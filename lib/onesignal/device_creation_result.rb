@@ -1,3 +1,5 @@
+require 'onesignal/gateway'
+
 module Onesignal
   # The DeviceCreationResult class is responsible of exposing the results of a device creatino operation
   # @since 0.0.1
@@ -15,8 +17,7 @@ module Onesignal
     # Builds a DeviceCreationResult from a gateway response
     # @return [DeviceCreationResult]
     def self.from_device_creation(gateway_response)
-      body = gateway_response.body
-      if body.nil?
+      if Gateway::STATUSES_WITHOUT_BODY.include?(gateway_response.status)
         DeviceCreationResult.new('errors' => [''])
       else
         DeviceCreationResult.new(gateway_response.body)

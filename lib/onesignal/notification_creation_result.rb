@@ -1,3 +1,5 @@
+require 'onesignal/gateway'
+
 module Onesignal
   # The NotificationCreationResult class is responsible of exposing the results of a notification creatino operation
   # @since 0.0.1
@@ -18,11 +20,10 @@ module Onesignal
     # Builds a NotificationCreationResult from a gateway response
     # @return [NotificationCreationResult]
     def self.from_notification_creation(gateway_response)
-      body = gateway_response.body
-      if body.nil?
+      if Gateway::STATUSES_WITHOUT_BODY.include?(gateway_response.status)
         NotificationCreationResult.new('errors' => [''])
       else
-        NotificationCreationResult.new(body)
+        NotificationCreationResult.new(gateway_response.body)
       end
     end
 
