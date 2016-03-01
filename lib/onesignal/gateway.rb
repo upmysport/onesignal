@@ -7,6 +7,7 @@ module Onesignal
     URL = 'https://onesignal.com'.freeze
     DEVICES_ENDPOINT = 'api/v1/players'.freeze
     NOTIFICATIONS_ENDPOINT = 'api/v1/notifications'.freeze
+    STATUSES_WITHOUT_BODY = [204, 304].freeze
 
     def initialize(configuration = Onesignal.configuration)
       @http_client = create_http_client

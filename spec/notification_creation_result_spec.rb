@@ -20,6 +20,27 @@ module Onesignal
         expect(result).to be_success
       end
 
+      context 'when response body is success and has errors' do
+        let(:errors) { { 'invalid_player_ids' => ['1111'] }  }
+        let(:response) { double(status: 200, body: { 'errors' => errors }) }
+
+        it 'sets the notification_id to empty' do
+          expect(result.notification_id).to eq('')
+        end
+
+        it 'sets the number of recipients to 0' do
+          expect(result.recipients).to eq(0)
+        end
+
+        it 'maps the errors' do
+          expect(result.errors).to eq(errors)
+        end
+
+        it 'maps the status to not success' do
+          expect(result).to_not be_success
+        end
+      end
+
       context 'when response is not sucess' do
         let(:errors) { ['one error'] }
         let(:response) { double(status: 400, body: { 'errors' => errors }) }
@@ -48,8 +69,8 @@ module Onesignal
           expect(result).to_not be_success
         end
 
-        it 'maps the errors to an empty array' do
-          expect(result.errors).to be_empty
+        it 'maps the errors to an array with an empty string' do
+          expect(result.errors).to eq([''])
         end
       end
     end
