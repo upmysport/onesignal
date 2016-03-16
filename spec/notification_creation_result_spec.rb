@@ -86,7 +86,15 @@ module Onesignal
         let(:response) { double(status: 400, body: { 'errors' => ['one error'] }) }
 
         it 'returns a string with the erros' do
-          expect(result.to_s).to eq('Errors: one error')
+          expect(result.to_s).to eq('Errors: ["one error"]')
+        end
+      end
+
+      context 'whne response has an errors hash' do
+        let(:response) { double(status: 200, body: { 'errors' => { 'invalid_player_ids' => ['id'] } }) }
+
+        it 'returns a string with the erros' do
+          expect(result.to_s).to eq('Errors: {"invalid_player_ids"=>["id"]}')
         end
       end
 
@@ -94,7 +102,7 @@ module Onesignal
         let(:response) { double(status: 204, body: nil) }
 
         it 'returns an empty string' do
-          expect(result.to_s).to eq('Errors: ')
+          expect(result.to_s).to eq('Errors: [""]')
         end
       end
     end

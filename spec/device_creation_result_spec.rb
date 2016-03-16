@@ -60,14 +60,15 @@ module Onesignal
         let(:response) { double(status: 400, body: { 'errors' => ['one error'] }) }
 
         it 'returns a string with the erros' do
-          expect(result.to_s).to eq('Errors: one error')
+          expect(result.to_s).to eq('Errors: ["one error"]')
         end
       end
+
       context 'when response has no content' do
         let(:response) { double(status: 204, body: nil) }
 
         it 'returns an empty string' do
-          expect(result.to_s).to eq('Errors: ')
+          expect(result.to_s).to eq('Errors: [""]')
         end
       end
     end

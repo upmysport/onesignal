@@ -30,7 +30,7 @@ module Onesignal
     end
 
     def to_s
-      return "Errors: #{@errors.join(', ')}" unless success?
+      return "Errors: #{@errors}" unless success?
 
       "Success, device_id: #{device_id}"
     end
