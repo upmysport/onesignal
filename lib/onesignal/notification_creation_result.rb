@@ -29,11 +29,11 @@ module Onesignal
 
     # @return [Boolean] Returns true when the operation was success
     def success?
-      @errors.empty?
+      errors.empty?
     end
 
     def to_s
-      return "Errors: #{@errors}" unless success?
+      return "Errors: #{errors}" unless success?
 
       "Success, notification_id: #{notification_id}, recipients: #{recipients}"
     end
