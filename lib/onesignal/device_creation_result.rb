@@ -18,9 +18,9 @@ module Onesignal
     # @return [DeviceCreationResult]
     def self.from_device_creation(gateway_response)
       if Gateway::STATUSES_WITHOUT_BODY.include?(gateway_response.status)
-        DeviceCreationResult.new('errors' => [''])
+        new('errors' => [''])
       else
-        DeviceCreationResult.new(gateway_response.body)
+        new(gateway_response.body)
       end
     end
 

@@ -21,9 +21,9 @@ module Onesignal
     # @return [NotificationCreationResult]
     def self.from_notification_creation(gateway_response)
       if Gateway::STATUSES_WITHOUT_BODY.include?(gateway_response.status)
-        NotificationCreationResult.new('errors' => [''])
+        new('errors' => [''])
       else
-        NotificationCreationResult.new(gateway_response.body)
+        new(gateway_response.body)
       end
     end
 
