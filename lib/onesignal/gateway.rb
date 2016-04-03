@@ -9,21 +9,21 @@ module Onesignal
     NOTIFICATIONS_ENDPOINT = 'api/v1/notifications'.freeze
     STATUSES_WITHOUT_BODY = [204, 304].freeze
 
-    def initialize(configuration = Onesignal.configuration)
+    def initialize(app_id = Onesignal.app_id)
       @http_client = create_http_client
-      @configuration = configuration
+      @app_id = app_id
     end
 
     # Makes a POST request to the players endpoint
     # @return [Hash]
     def create_device(params = {})
-      @http_client.post(DEVICES_ENDPOINT, params.merge(app_id: @configuration.app_id))
+      @http_client.post(DEVICES_ENDPOINT, params.merge(app_id: @app_id))
     end
 
     # Makes a POST request to the notifications endpoint
     # @return [Hash]
     def create_notification(params = {})
-      @http_client.post(NOTIFICATIONS_ENDPOINT, params.merge(app_id: @configuration.app_id))
+      @http_client.post(NOTIFICATIONS_ENDPOINT, params.merge(app_id: @app_id))
     end
 
     private
