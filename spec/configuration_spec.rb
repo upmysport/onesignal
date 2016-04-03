@@ -23,6 +23,10 @@ RSpec.describe Onesignal do
       expect(Onesignal.app_id).to eq(app_id)
     end
 
+    it 'sets the default logger' do
+      expect(Onesignal.log).to be_a(Logger)
+    end
+
     context 'when badge information is provided' do
       let(:ios_badge_type) { 'SetTo' }
       let(:ios_badge_count) { 1 }
