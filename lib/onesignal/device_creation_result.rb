@@ -18,19 +18,19 @@ module Onesignal
     # @return [DeviceCreationResult]
     def self.from_device_creation(gateway_response)
       if Gateway::STATUSES_WITHOUT_BODY.include?(gateway_response.status)
-        DeviceCreationResult.new('errors' => [''])
+        new('errors' => [''])
       else
-        DeviceCreationResult.new(gateway_response.body)
+        new(gateway_response.body)
       end
     end
 
     # @return [Boolean] Returns true when the operation was success
     def success?
-      @errors.empty?
+      errors.empty?
     end
 
     def to_s
-      return "Errors: #{@errors}" unless success?
+      return "Errors: #{errors}" unless success?
 
       "Success, device_id: #{device_id}"
     end
