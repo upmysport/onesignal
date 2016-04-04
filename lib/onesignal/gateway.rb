@@ -9,8 +9,8 @@ module Onesignal
     NOTIFICATIONS_ENDPOINT = 'api/v1/notifications'.freeze
     STATUSES_WITHOUT_BODY = [204, 304].freeze
 
-    def initialize(app_id = Onesignal.app_id)
-      @http_client = create_http_client
+    def initialize(app_id = Onesignal.app_id, log = Onesignal.log)
+      @http_client = create_http_client(log)
       @app_id = app_id
     end
 
@@ -28,11 +28,12 @@ module Onesignal
 
     private
 
-    def create_http_client
+    def create_http_client(log)
       Faraday.new(url: URL) do |faraday|
         faraday.request :json
         faraday.response :json, content_type: /\bjson$/
         faraday.adapter Faraday.default_adapter
+        faraday.response :logger, log, bodies: true
       end
     end
   end
