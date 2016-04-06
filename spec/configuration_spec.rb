@@ -11,11 +11,11 @@ RSpec.describe Onesignal do
       end
     end
 
-    it 'set default ios badge type to Increment' do
+    it 'sets default ios badge type to Increment' do
       expect(Onesignal.ios_badge_type).to eq('Increase')
     end
 
-    it 'set default ios count type to 1' do
+    it 'sets default ios count type to 1' do
       expect(Onesignal.ios_badge_count).to eq(1)
     end
 
