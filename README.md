@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/upmysport/onesignal.png?label=ready&title=Ready)](https://waffle.io/upmysport/onesignal)
 [![Build Status](https://circleci.com/gh/upmysport/onesignal.svg?style=shield)](https://circleci.com/gh/upmysport/onesignal)
 [![Dependency Status](https://gemnasium.com/upmysport/one_signal.svg)](https://gemnasium.com/upmysport/one_signal)
 [![Code Climate](https://codeclimate.com/github/upmysport/onesignal/badges/gpa.svg)](https://codeclimate.com/github/upmysport/onesignal)
