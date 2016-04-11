@@ -23,3 +23,8 @@ end
 
 require 'dotenv'
 Dotenv.load
+
+require 'onesignal'
+Onesignal.configure do |config|
+  config.app_id = ENV['TEST_APP_ID']
+end
