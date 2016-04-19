@@ -12,9 +12,6 @@ RSpec.describe 'One Signal API client' do
   before(:all) do
     WebMock.allow_net_connect!
     VCR.turn_off!
-    Onesignal.configure do |config|
-      config.app_id = ENV['TEST_APP_ID']
-    end
   end
 
   after(:all) do

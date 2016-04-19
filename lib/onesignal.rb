@@ -1,6 +1,7 @@
 require 'onesignal/version'
 require 'onesignal/client'
 require 'forwardable'
+require 'logger'
 
 # The Onesignal module provides access to all the main operations
 module Onesignal
@@ -9,8 +10,7 @@ module Onesignal
     # @return [Configuration]
     attr_accessor :configuration
 
-    # @see Configuration#app_id
-    def_delegators :configuration, :app_id, :ios_badge_type, :ios_badge_count
+    def_delegators :configuration, :app_id, :ios_badge_type, :ios_badge_count, :log
 
     # @see Client#add_device
     def_delegators :client, :add_device
@@ -37,10 +37,13 @@ module Onesignal
     attr_accessor :ios_badge_type
     # @return [Integer] the amount to increase the badge
     attr_accessor :ios_badge_count
+    # @return [Logger] the default logger for all onesignal instances
+    attr_accessor :log
 
     def initialize
       @ios_badge_type = 'Increase'
       @ios_badge_count = 1
+      @log = Logger.new($stderr)
     end
   end
 end

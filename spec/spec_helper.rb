@@ -23,3 +23,13 @@ end
 
 require 'dotenv'
 Dotenv.load
+
+require 'fileutils'
+FileUtils.mkdir_p 'tmp'
+
+require 'onesignal'
+Onesignal.configure do |config|
+  config.app_id = ENV['TEST_APP_ID']
+  logger = Logger.new(File.new('tmp/test.log', 'w'))
+  config.log = logger
+end

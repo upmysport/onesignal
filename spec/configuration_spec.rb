@@ -5,22 +5,20 @@ RSpec.describe Onesignal do
   describe '.configure' do
     let(:app_id) { 'test id' }
 
-    before do
-      Onesignal.configure do |config|
-        config.app_id = app_id
-      end
-    end
-
-    it 'set default ios badge type to Increment' do
+    it 'sets default ios badge type to Increment' do
       expect(Onesignal.ios_badge_type).to eq('Increase')
     end
 
-    it 'set default ios count type to 1' do
+    it 'sets default ios count type to 1' do
       expect(Onesignal.ios_badge_count).to eq(1)
     end
 
     it 'sets the app_id value' do
-      expect(Onesignal.app_id).to eq(app_id)
+      expect(Onesignal.app_id).to_not be_nil
+    end
+
+    it 'sets the default logger' do
+      expect(Onesignal.log).to be_a(Logger)
     end
 
     context 'when badge information is provided' do
@@ -29,7 +27,6 @@ RSpec.describe Onesignal do
 
       before do
         Onesignal.configure do |config|
-          config.app_id = app_id
           config.ios_badge_type = ios_badge_type
           config.ios_badge_count = ios_badge_count
         end
