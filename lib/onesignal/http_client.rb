@@ -9,6 +9,7 @@ module Onesignal
       @app_id = app_id
       @connection = Faraday.new(url: URL) do |connection|
         connection.request :json
+        connection.request :retry
         connection.response :json, content_type: /\bjson$/
         connection.adapter Faraday.default_adapter
         connection.response :logger, log, bodies: true
