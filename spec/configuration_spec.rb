@@ -21,10 +21,6 @@ RSpec.describe Onesignal do
       expect(Onesignal.log).to be_a(Logger)
     end
 
-    it 'has no test_type' do
-      expect(Onesignal.test_type).to be_nil
-    end
-
     context 'when badge information is provided' do
       let(:ios_badge_type) { 'SetTo' }
       let(:ios_badge_count) { 1 }
@@ -43,6 +39,33 @@ RSpec.describe Onesignal do
       it 'set default ios count type to 1' do
         expect(Onesignal.ios_badge_count).to eq(ios_badge_count)
       end
+    end
+  end
+
+  describe '.test_type' do
+    subject { Onesignal.test_type }
+
+    before do 
+      old_config = Onesignal.configuration
+      Onesignal.reset_configuration do |config| 
+        [:app_id, :log].each do |attr|
+          config.send("#{attr}=".to_sym, old_config.send(attr))
+        end
+      end
+    end
+
+    context 'default value' do
+      it { is_expected.to be_nil }
+    end
+
+    context 'when test type is set' do
+      before do
+        Onesignal.configure do |config|
+          config.test_type = 1
+        end
+      end
+
+      it { is_expected.to eq(1) }
     end
   end
 end

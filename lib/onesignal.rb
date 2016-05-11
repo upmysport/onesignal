@@ -23,6 +23,13 @@ module Onesignal
     Onesignal::Client.new
   end
 
+  # Exists to allow for realistic testing of initialised configuration
+  # @return [Configuration] The replaced configuration singleton
+  def self.reset_configuration
+    self.configuration = Configuration.new
+    yield(configuration)
+  end
+
   # @return [Configuration] The configuration singleton
   def self.configure
     self.configuration ||= Configuration.new
