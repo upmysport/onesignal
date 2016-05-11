@@ -26,7 +26,7 @@ module Onesignal
     # @return [DeviceCreationResult] The response object which holds the add device status
     def add_device(device_type:, identifier:)
       DeviceCreationResult.from_device_creation(
-        gateway.create_device(device_type: device_type, identifier: identifier)
+        gateway.create_device(environment_params.merge(device_type: device_type, identifier: identifier))
       )
     end
 
@@ -54,6 +54,12 @@ module Onesignal
     end
 
     private
+
+    def environment_params
+      return {} if @configuration.test_type.nil?
+
+      { test_type: @configuration.test_type }
+    end
 
     def ios_params
       { ios_badgeType: @configuration.ios_badge_type, ios_badgeCount: @configuration.ios_badge_count }

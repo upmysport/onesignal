@@ -9,7 +9,10 @@ module Onesignal
     let(:data) { { foo: 'bar' } }
     let(:ios_badge_type) { 'Increase' }
     let(:ios_badge_count) { 1 }
-    let(:configuration) { double(ios_badge_type: ios_badge_type, ios_badge_count: ios_badge_count) }
+    let(:test_type) { nil }
+    let(:configuration) do
+      double(ios_badge_type: ios_badge_type, ios_badge_count: ios_badge_count, test_type: test_type)
+    end
 
     describe '#add_device' do
       let(:identifier) { 'ce777617da7f548fe7a9ab6febb56' }
@@ -21,6 +24,14 @@ module Onesignal
         client.add_device(device_type: type, identifier: identifier)
 
         expect(gateway).to have_received(:create_device).with(device_type: type, identifier: identifier)
+      end
+
+      context 'when test_type has been set' do
+        let(:test_type) { 1 }
+        it 'includes the test type indicator' do
+          client.add_device(device_type: type, identifier: identifier)
+          expect(gateway).to have_received(:create_device).with(device_type: type, identifier: identifier, test_type: 1)
+        end
       end
     end
 

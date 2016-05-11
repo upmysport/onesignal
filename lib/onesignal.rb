@@ -46,7 +46,7 @@ module Onesignal
     attr_accessor :ios_badge_count
     # @return [Logger] the default logger for all onesignal instances
     attr_accessor :log
-    # @return [Integer] the test type for all onesignal device creatio 
+    # @return [Integer] the test type for all onesignal device creation
     attr_accessor :test_type
 
     def initialize

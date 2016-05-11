@@ -45,9 +45,9 @@ RSpec.describe Onesignal do
   describe '.test_type' do
     subject { Onesignal.test_type }
 
-    before do 
+    before do
       old_config = Onesignal.configuration
-      Onesignal.reset_configuration do |config| 
+      Onesignal.reset_configuration do |config|
         [:app_id, :log].each do |attr|
           config.send("#{attr}=".to_sym, old_config.send(attr))
         end
