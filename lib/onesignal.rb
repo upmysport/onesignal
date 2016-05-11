@@ -10,7 +10,7 @@ module Onesignal
     # @return [Configuration]
     attr_accessor :configuration
 
-    def_delegators :configuration, :app_id, :ios_badge_type, :ios_badge_count, :log
+    def_delegators :configuration, :app_id, :ios_badge_type, :ios_badge_count, :log, :test_type
 
     # @see Client#add_device
     def_delegators :client, :add_device
@@ -39,6 +39,8 @@ module Onesignal
     attr_accessor :ios_badge_count
     # @return [Logger] the default logger for all onesignal instances
     attr_accessor :log
+    # @return [Integer] the test type for all onesignal device creatio 
+    attr_accessor :test_type
 
     def initialize
       @ios_badge_type = 'Increase'

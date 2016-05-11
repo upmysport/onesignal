@@ -21,6 +21,10 @@ RSpec.describe Onesignal do
       expect(Onesignal.log).to be_a(Logger)
     end
 
+    it 'has no test_type' do
+      expect(Onesignal.test_type).to be_nil
+    end
+
     context 'when badge information is provided' do
       let(:ios_badge_type) { 'SetTo' }
       let(:ios_badge_count) { 1 }
