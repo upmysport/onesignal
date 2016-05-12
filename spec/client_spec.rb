@@ -16,6 +16,7 @@ module Onesignal
       let(:type) { 0 }
       let(:onesignal_response) { double(status: 200, body: {}) }
       let(:gateway) { instance_double(Gateway, create_device: onesignal_response) }
+      let(:configuration) { instance_double(Configuration) }
 
       it 'sends the right message to the gateway' do
         client.add_device(device_type: type, identifier: identifier)
