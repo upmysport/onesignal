@@ -10,7 +10,7 @@ module Onesignal
     # @return [Configuration]
     attr_accessor :configuration
 
-    def_delegators :configuration, :app_id, :ios_badge_type, :ios_badge_count, :log
+    def_delegators :configuration, :app_id, :log
 
     # @see Client#add_device
     def_delegators :client, :add_device

@@ -48,15 +48,9 @@ module Onesignal
         contents: { locale => message },
         include_player_ids: Array(devices_ids),
         data: extra_data
-      }.merge(ios_params)
+      }.merge(@configuration.ios_notification_params)
 
       NotificationCreationResult.from_notification_creation(gateway.create_notification(params))
-    end
-
-    private
-
-    def ios_params
-      { ios_badgeType: @configuration.ios_badge_type, ios_badgeCount: @configuration.ios_badge_count }
     end
   end
 end
