@@ -26,6 +26,6 @@ module Onesignal
   # @return [Configuration] The configuration singleton
   def self.configure
     self.configuration ||= Configuration.new
-    yield(configuration)
+    yield(configuration) if block_given?
   end
 end
