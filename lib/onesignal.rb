@@ -1,7 +1,7 @@
 require 'onesignal/version'
 require 'onesignal/client'
+require 'onesignal/configuration'
 require 'forwardable'
-require 'logger'
 
 # The Onesignal module provides access to all the main operations
 module Onesignal
@@ -10,7 +10,7 @@ module Onesignal
     # @return [Configuration]
     attr_accessor :configuration
 
-    def_delegators :configuration, :app_id, :ios_badge_type, :ios_badge_count, :log
+    def_delegators :configuration, :app_id, :log
 
     # @see Client#add_device
     def_delegators :client, :add_device
@@ -26,24 +26,6 @@ module Onesignal
   # @return [Configuration] The configuration singleton
   def self.configure
     self.configuration ||= Configuration.new
-    yield(configuration)
-  end
-
-  # This class stores configuration data like Onesignal applicaiton id
-  class Configuration
-    # @return [String] the Onesignal application id
-    attr_accessor :app_id
-    # @return [String] the badge type, `None, SetTo, Increase`
-    attr_accessor :ios_badge_type
-    # @return [Integer] the amount to increase the badge
-    attr_accessor :ios_badge_count
-    # @return [Logger] the default logger for all onesignal instances
-    attr_accessor :log
-
-    def initialize
-      @ios_badge_type = 'Increase'
-      @ios_badge_count = 1
-      @log = Logger.new($stderr)
-    end
+    yield(configuration) if block_given?
   end
 end
