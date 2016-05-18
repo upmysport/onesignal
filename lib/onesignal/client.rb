@@ -25,9 +25,8 @@ module Onesignal
     # @param identifier [String] Push notification identifier from Google or Apple
     # @return [DeviceCreationResult] The response object which holds the add device status
     def add_device(device_type:, identifier:)
-      DeviceCreationResult.from_device_creation(
-        gateway.create_device(device_type: device_type, identifier: identifier)
-      )
+      params = { device_type: device_type, identifier: identifier }.merge(@configuration.ios_device_params)
+      DeviceCreationResult.from_device_creation(gateway.create_device(params))
     end
 
     # Sends a notification to devices
