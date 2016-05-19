@@ -13,12 +13,24 @@ module Onesignal
       let(:type) { 0 }
       let(:onesignal_response) { double(status: 200, body: {}) }
       let(:gateway) { instance_double(Gateway, create_device: onesignal_response) }
-      let(:configuration) { instance_double(Configuration) }
+      let(:ios_device_params) { Hash.new }
+      let(:configuration) { instance_double(Configuration, ios_device_params: ios_device_params) }
 
       it 'sends the right message to the gateway' do
         client.add_device(device_type: type, identifier: identifier)
 
         expect(gateway).to have_received(:create_device).with(device_type: type, identifier: identifier)
+      end
+
+      context 'when test_type has been set' do
+        let(:test_type) { 1 }
+        let(:ios_device_params) { { test_type:  test_type } }
+
+        it 'sends the test_type indicator in the message to the gateway' do
+          client.add_device(device_type: type, identifier: identifier)
+          expect(gateway).to have_received(:create_device)
+            .with(device_type: type, identifier: identifier, test_type: test_type)
+        end
       end
     end
 

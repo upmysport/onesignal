@@ -36,4 +36,21 @@ RSpec.describe Configuration do
       expect(configuration.app_id).to eq(app_id)
     end
   end
+
+  describe '#ios_device_params' do
+    specify 'empty hash is the defualt return value' do
+      expect(configuration.ios_device_params).to eq({})
+    end
+
+    context 'when device_params are provided' do
+      let(:test_type) { 1 }
+      let(:expected_params) { { test_type: test_type } }
+
+      it 'returns the provided values' do
+        configuration.ios_device_test_type = 1
+
+        expect(configuration.ios_device_params).to eq(expected_params)
+      end
+    end
+  end
 end
