@@ -11,6 +11,7 @@
 *.so
 *.o
 *.a
+*.swp
 mkmf.log
 .env
 spec/vcr_cassettes/
