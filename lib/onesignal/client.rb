@@ -6,7 +6,8 @@ module Onesignal
   # The Client is a class responsible of handling all the requests to Onesignal REST API
   # @since 0.0.1
   class Client
-    attr_reader :gateway
+    attr_reader :gateway, :configuration
+    protected :gateway, :configuration
 
     def initialize(gateway = Gateway.new, configuration = Onesignal.configuration)
       @gateway = gateway
@@ -25,7 +26,7 @@ module Onesignal
     # @param identifier [String] Push notification identifier from Google or Apple
     # @return [DeviceCreationResult] The response object which holds the add device status
     def add_device(device_type:, identifier:)
-      params = { device_type: device_type, identifier: identifier }.merge(@configuration.ios_device_params)
+      params = { device_type: device_type, identifier: identifier }.merge(configuration.ios_device_params)
       DeviceCreationResult.from_device_creation(gateway.create_device(params))
     end
 
@@ -47,7 +48,7 @@ module Onesignal
         contents: { locale => message },
         include_player_ids: Array(devices_ids),
         data: extra_data
-      }.merge(@configuration.ios_notification_params)
+      }.merge(configuration.ios_notification_params)
 
       NotificationCreationResult.from_notification_creation(gateway.create_notification(params))
     end
