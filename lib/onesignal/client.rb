@@ -7,6 +7,7 @@ module Onesignal
   # @since 0.0.1
   class Client
     attr_reader :gateway, :configuration
+    protected :gateway, :configuration
 
     def initialize(gateway = Gateway.new, configuration = Onesignal.configuration)
       @gateway = gateway

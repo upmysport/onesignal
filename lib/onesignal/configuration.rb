@@ -13,6 +13,8 @@ class Configuration
   # @return [Logger] the default logger for all onesignal instances
   attr_accessor :log
 
+  protected :ios_badge_type, :ios_badge_count, :ios_device_test_type
+
   def initialize
     @ios_badge_type = 'Increase'
     @ios_badge_count = 1

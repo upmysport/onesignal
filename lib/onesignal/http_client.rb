@@ -6,6 +6,7 @@ module Onesignal
     URL = 'https://onesignal.com'.freeze
 
     attr_reader :app_id, :connection
+    protected :app_id, :connection
 
     def initialize(log = Onesignal.log, app_id = Onesignal.app_id)
       @app_id = app_id

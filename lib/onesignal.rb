@@ -9,6 +9,7 @@ module Onesignal
     extend Forwardable
     # @return [Configuration]
     attr_accessor :configuration
+    protected :configuration=
 
     def_delegators :configuration, :app_id, :log
 

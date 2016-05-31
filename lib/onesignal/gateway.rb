@@ -8,6 +8,7 @@ module Onesignal
     STATUSES_WITHOUT_BODY = [204, 304].freeze
 
     attr_reader :http_client
+    protected :http_client
 
     def initialize(http_client = HTTPClient.new)
       @http_client = http_client
