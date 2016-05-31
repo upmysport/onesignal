@@ -5,6 +5,8 @@ module Onesignal
   class HTTPClient
     URL = 'https://onesignal.com'.freeze
 
+    attr_reader :app_id, :connection
+
     def initialize(log = Onesignal.log, app_id = Onesignal.app_id)
       @app_id = app_id
       @connection = Faraday.new(url: URL) do |connection|
@@ -17,7 +19,7 @@ module Onesignal
     end
 
     def post(endpoint, params)
-      @connection.post(endpoint, params.merge(app_id: @app_id))
+      connection.post(endpoint, params.merge(app_id: app_id))
     end
   end
 end
