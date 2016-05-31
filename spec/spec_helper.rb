@@ -32,4 +32,5 @@ Onesignal.configure do |config|
   config.app_id = ENV['TEST_APP_ID']
   logger = Logger.new(File.new('tmp/test.log', 'w'))
   config.log = logger
+  config.ios_device_test_type = 2
 end
