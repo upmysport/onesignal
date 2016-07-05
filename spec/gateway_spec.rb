@@ -3,14 +3,14 @@ require 'onesignal/gateway'
 
 module Onesignal
   RSpec.describe Gateway do
-    subject(:gategay) { described_class.new }
+    subject(:gateway) { described_class.new }
     let(:identifier) { 'ce777617da7f548fe7a9ab6febb56cf39fba6d382000c0395666288d961ee566' }
     let(:device_type) { 0 }
 
     describe '#create_device' do
       let(:response) do
         VCR.use_cassette('create_device') do
-          gategay.create_device(identifier: identifier, device_type: device_type)
+          gateway.create_device(identifier: identifier, device_type: device_type)
         end
       end
 
@@ -28,13 +28,13 @@ module Onesignal
       let(:data) { { foo: 'bar' } }
       let(:device_id) do
         VCR.use_cassette('create_device') do
-          response = gategay.create_device(identifier: identifier, device_type: device_type)
+          response = gateway.create_device(identifier: identifier, device_type: device_type)
           response.body['id']
         end
       end
       let(:response) do
         VCR.use_cassette('create_notification') do
-          gategay.create_notification(contents: contents, include_player_ids: [device_id], data: data)
+          gateway.create_notification(contents: contents, include_player_ids: [device_id], data: data)
         end
       end
 
@@ -53,7 +53,7 @@ module Onesignal
       context 'when request is invalid' do
         let(:response) do
           VCR.use_cassette('create_notification_invalid_request') do
-            gategay.create_notification(contents: {}, include_player_ids: ['invalid_id'])
+            gateway.create_notification(contents: {}, include_player_ids: ['invalid_id'])
           end
         end
 
