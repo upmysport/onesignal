@@ -1,3 +1,6 @@
 test:
+  override:
+    - bundle exec rspec
+    - bundle exec rspec --tag integration
   post:
     - bundle exec rubocop
