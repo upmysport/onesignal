@@ -9,15 +9,6 @@ RSpec.describe 'One Signal API client' do
     { type: 'review', listing_id: '337', username: 'pierreespenan0' }
   end
 
-  before(:all) do
-    WebMock.allow_net_connect!
-    VCR.turn_off!
-  end
-
-  after(:all) do
-    VCR.turn_on!
-  end
-
   it 'adds a device to a One Signal application' do
     result = Onesignal.add_device(device_type: device_type, identifier: identifier)
 
