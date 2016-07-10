@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'onesignal'
 
-RSpec.describe 'One Signal API client' do
+RSpec.describe 'One Signal API client', integration: true do
   let(:device_type) { 0 }
   let(:identifier) { 'a4179573652efd80f11ace1496f84f6c96eb2928bedbd70c2329ad4e44537b25' }
   let(:message) { 'Leave a review for Pierre!' }

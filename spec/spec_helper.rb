@@ -12,6 +12,7 @@ RSpec.configure do |config|
   config.profile_examples = 3
   config.order = :random
   Kernel.srand config.seed
+  config.filter_run_excluding integration: true
 end
 
 require 'dotenv'
