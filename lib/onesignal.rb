@@ -5,6 +5,8 @@ require 'forwardable'
 
 # The Onesignal module provides access to all the main operations
 module Onesignal
+  DEVICE_TYPES = { ios: 0, android: 1 }.freeze
+
   class << self
     extend Forwardable
     # @return [Configuration]

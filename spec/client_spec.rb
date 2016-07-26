@@ -32,6 +32,14 @@ module Onesignal
             .with(device_type: type, identifier: identifier, test_type: test_type)
         end
       end
+
+      Onesignal::DEVICE_TYPES.each do |device_type, value|
+        it "sends the right device (#{value}) to the gateway when device is #{device_type}" do
+          client.add_device(device_type: device_type, identifier: identifier)
+
+          expect(gateway).to have_received(:create_device).with(device_type: value, identifier: identifier)
+        end
+      end
     end
 
     describe '#notify' do
