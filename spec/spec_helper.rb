@@ -1,3 +1,8 @@
+require 'dotenv'
+require 'onesignal'
+require 'fileutils'
+require 'codeclimate-test-reporter'
+
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
@@ -15,16 +20,15 @@ RSpec.configure do |config|
   config.filter_run_excluding integration: true
 end
 
-require 'dotenv'
 Dotenv.load
 
-require 'fileutils'
 FileUtils.mkdir_p 'tmp'
 
-require 'onesignal'
 Onesignal.configure do |config|
   config.app_id = ENV['TEST_APP_ID']
   logger = Logger.new(File.new('tmp/test.log', 'w'))
   config.log = logger
   config.ios_device_test_type = 2
 end
+
+CodeClimate::TestReporter.start
