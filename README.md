@@ -23,7 +23,7 @@ end
 Then the client will be ready to receive method calls on the Onesignal module.
 
 ```ruby
-result = Onesignal.add_device(device_type: 0, identifier: 'ce777617da7f548fe7a9ab6febb56')
+result = Onesignal.add_device(device_type: :ios, identifier: 'ce777617da7f548fe7a9ab6febb56')
 Onesignal.notify(message: 'Test notification', devices_ids: result.device_id)
 ```
 
